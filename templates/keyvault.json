@@ -23,32 +23,9 @@
     "enableSoftDelete": {
       "type": "bool",
       "defaultValue": false
-    },
-    "logAnalyticsWorkspaceName": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "The name of the OMS workspace that will collect audit events"
-      }
-    },
-    "logAnalyticsWorkspaceResourceGroupName": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "The name of the OMS workspace resource group that will collect audit events"
-      }
-    },
-    "logAnalyticsWorkspaceSubscriptionId": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "The id of the OMS workspace subscription that will collect audit events"
-      }
     }
   },
-  "variables": {    
-                  "diagnosticSettingName": "diagnosticSettingName"
-  },
+  "variables": {},
   "resources": [
     {
       "type": "Microsoft.KeyVault/vaults",
@@ -66,27 +43,7 @@
           "family": "A"
         }
       }
-    },
-  {
-          "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
-          "name": "[concat('master/microsoft.insights/',variables('diagnosticSettingName'))]",
-          "apiVersion": "2017-05-01-preview",
-          "properties": {
-            "name": "[variables('diagnosticSettingName')]",
-            "workspaceId": "[resourceId(parameters('logAnalyticsWorkspaceSubscriptionId'), parameters('logAnalyticsWorkspaceResourceGroupName'), 'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]",
-            "logs": [
-              {
-                "category": "AuditEvents",
-                "enabled": true
-              }
-            ],
-            "metrics": [
-              {
-                  "category": "AllMetrics",
-                  "enabled": true
-              }
-            ]
-          }
+    }
   ],
   "outputs": {
     "KeyVaultUri": {
