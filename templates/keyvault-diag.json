@@ -25,7 +25,7 @@
   "variables": {},
   "resources": [
         {
-            "type": "Microsoft.Web/sites/providers/diagnosticSettings",
+            "type": "Microsoft.KeyVault/vaults/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('resourceName'),'/microsoft.insights/', parameters('settingName'))]",
             "dependsOn": [],
