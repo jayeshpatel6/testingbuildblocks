@@ -18,9 +18,23 @@
     "workspaceId": {
         "type": "String",
         "metadata": {
-            "description": "ResourceIDl of the Log Analytics workspace in which resource logs should be saved."
+            "description": "ResourceID of the Log Analytics workspace in which resource logs should be saved."
         }
-    }
+    },
+    "auditEventSetting": {
+        "type": "String",
+        "defaultvalue": "false",
+        "metadata": {
+            "description": "Audit Event diagnostic setting"
+        }
+    },
+	"allMetricsSetting": {
+		"type": "String",
+		"defaultvalue": "false",
+		"metadata": {
+			"description": "All Metrics diagnostic setting"
+		}
+	}
   },
   "variables": {},
   "resources": [
@@ -35,13 +49,13 @@
                 "logs": [
                     {
                         "category": "AuditEvent",
-                        "enabled": false
+                        "enabled": "[parameters('auditEventSetting')]"
                     }
                 ],
                 "metrics": [
                     {
                         "category": "AllMetrics",
-                        "enabled": false
+                        "enabled": "[parameters('allMetricsSetting')]"
                     }
                 ]
             }
