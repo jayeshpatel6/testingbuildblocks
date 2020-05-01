@@ -74,6 +74,7 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/providers/diagnosticSettings",
+      "condition": "[greater(length(parameters('workspaceId')), 0)]",
       "apiVersion": "2017-05-01-preview",
       "name": "[concat(parameters('keyVaultName'),'/microsoft.insights/', parameters('settingName'))]",
       "dependsOn": [
