@@ -34,7 +34,7 @@
                 "workspaceId": "[parameters('workspaceId')]",
                 "logs": [
                     {
-                        "category": "AuditEvents",
+                        "category": "AuditEvent",
                         "enabled": true
                     }
                 ],
