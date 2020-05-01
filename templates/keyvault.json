@@ -43,6 +43,28 @@
           "family": "A"
         }
       }
+    },
+    {
+		"type": "Microsoft.KeyVault/vaults/providers/diagnosticSettings",
+		"apiVersion": "2017-05-01-preview",
+		"name": "[concat(parameters('resourceName'),'/microsoft.insights/', parameters('settingName'))]",
+		"dependsOn": [],
+		"properties": {
+			"name": "[parameters('settingName')]",
+			"workspaceId": "[parameters('workspaceId')]",
+			"logs": [
+				{
+					"category": "AuditEvent",
+					"enabled": "[parameters('auditEventSetting')]"
+				}
+			],
+			"metrics": [
+				{
+					"category": "AllMetrics",
+					"enabled": "[parameters('allMetricsSetting')]"
+				}
+			]
+		}
     }
   ],
   "outputs": {
