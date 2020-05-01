@@ -35,13 +35,13 @@
                 "logs": [
                     {
                         "category": "AuditEvent",
-                        "enabled": true
+                        "enabled": false
                     }
                 ],
                 "metrics": [
                     {
                         "category": "AllMetrics",
-                        "enabled": true
+                        "enabled": false
                     }
                 ]
             }
