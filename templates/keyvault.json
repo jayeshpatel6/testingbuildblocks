@@ -40,14 +40,14 @@
     },
     "auditEventSetting": {
       "type": "String",
-      "defaultvalue": "false",
+      "defaultvalue": false,
       "metadata": {
         "description": "Audit Event diagnostic setting"
       }
     },
     "allMetricsSetting": {
       "type": "String",
-      "defaultvalue": "false",
+      "defaultvalue": false,
       "metadata": {
         "description": "All Metrics diagnostic setting"
       }
