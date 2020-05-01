@@ -31,12 +31,13 @@
             "description": "The name of the diagnostic setting"
          }
       },
-      "resourceName": {
-         "type": "String",
-         "metadata": {
-            "description": "The resource name of the diagnostic setting"
-         }
-      },
+    "resourceName": {
+      "type": "String",
+      "defaultvalue": "",
+      "metadata": {
+        "description": "The resource name of the diagnostic setting"
+      }
+    },
       "workspaceId": {
          "type": "String",
          "metadata": {
