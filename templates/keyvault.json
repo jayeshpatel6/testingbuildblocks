@@ -31,13 +31,6 @@
             "description": "The name of the diagnostic setting"
          }
       },
-    "resourceName": {
-      "type": "String",
-      "defaultvalue": "",
-      "metadata": {
-        "description": "The resource name of the diagnostic setting"
-      }
-    },
       "workspaceId": {
          "type": "String",
          "metadata": {
@@ -82,7 +75,7 @@
       "condition": "[greater(length(parameters('workspaceId')), 0)]",
       "type": "Microsoft.KeyVault/vaults/providers/diagnosticSettings",
       "apiVersion": "2017-05-01-preview",
-      "name": "[concat(parameters('resourceName'),'/microsoft.insights/', parameters('settingName'))]",
+      "name": "[concat(parameters('keyVaultName'),'/microsoft.insights/', parameters('settingName'))]",
       "dependsOn": [
         "[parameters('keyVaultName')]"
       ],
