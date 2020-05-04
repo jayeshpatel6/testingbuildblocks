@@ -57,7 +57,7 @@
       "defaultValue": true
     },
     "retentionPolicyDays": {
-      "type": "int",
+      "type": "string",
       "defaultValue": "30"
     }
   },
