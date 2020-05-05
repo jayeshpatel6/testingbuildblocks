@@ -203,50 +203,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
       ]
-    },
-    {
-    "type": "Microsoft.Web/sites/config",
-    "apiVersion": "2018-11-01",
-    "location": "[resourceGroup().location]",
-    "name": "[concat(parameters('appServiceName'), '/logs')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
-      ],
-    "properties": {
-        "applicationLogs": {
-            "fileSystem": {
-                "level": "Off"
-            },
-            "azureTableStorage": {
-                "level": "Off",
-                "sasUrl": null
-            },
-            "azureBlobStorage": {
-                "enabled": true,
-                "level": "verbose",
-                "retentionInDays": "88"
-            }
-        },
-        "httpLogs": {
-            "fileSystem": {
-                "retentionInMb": 35,
-                "retentionInDays": 10,
-                "enabled": true
-            },
-            "azureBlobStorage": {
-                "enabled": true,
-                "level": "verbose",
-                "retentionInDays": "99"
-            }
-        },
-        "failedRequestsTracing": {
-            "enabled": true
-        },
-        "detailedErrorMessages": {
-            "enabled": true
-        }
     }
-}
   ],
   "outputs": {
     "possibleOutboundIpAddresses": {
