@@ -226,12 +226,10 @@
                 "level": "Off"
             },
             "azureTableStorage": {
-                "level": "Off",
-                "sasUrl": null
+                "level": "Off"
             },
             "azureBlobStorage": {
                 "level": "verbose",
-                "sasUrl": "",
                 "retentionInDays": "55"
             }
         },
