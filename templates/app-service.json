@@ -229,7 +229,7 @@
                 "level": "Off"
             },
             "azureBlobStorage": {
-                "level": "verbose",
+                "level": "off",
                 "retentionInDays": "55"
             }
         },
@@ -240,8 +240,7 @@
                 "enabled": false
             },
             "azureBlobStorage": {
-                "enabled": false,
-                "sasUrl": "",
+                "enabled": true,
                 "retentionInDays": "55"
             }
         },
