@@ -139,24 +139,24 @@
           "connectionStrings": "[parameters('appServiceConnectionStrings')]",
           "virtualApplications": "[parameters('appServiceVirtualApplications')]",
           "ipSecurityRestrictions": "[parameters('ipSecurityRestrictions')]",
-          "ftpsState": "[parameters('ftpsState')]"
-        },
-        "httpsOnly": true,
-        "applicationLogs": {
-          "fileSystem": {
-            "level": "Off",
-            "sasUrl": null
+          "ftpsState": "[parameters('ftpsState')]",
+          "applicationLogs": {
+            "fileSystem": {
+              "level": "Off",
+              "sasUrl": null
 
-          },
-          "azureTableStorage": {
-            "level": "Off",
-            "sasUrl": null
-          },
-          "azureBlobStorage": {
-            "level": "verbose",
-            "retentionInDays": "55"
+            },
+            "azureTableStorage": {
+              "level": "Off",
+              "sasUrl": null
+            },
+            "azureBlobStorage": {
+              "level": "verbose",
+              "retentionInDays": "55"
+            }
           }
-        }
+        },
+        "httpsOnly": true
       },
       "resources": [
         {
