@@ -54,7 +54,7 @@
     },
     "retentionPolicyEnabled": {
       "type": "bool",
-      "defaultValue": true
+      "defaultValue": false
     },
     "retentionPolicyDays": {
       "type": "string",
