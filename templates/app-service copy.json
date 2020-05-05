@@ -173,42 +173,6 @@
           "dependsOn": [
             "[parameters('appServiceName')]"
           ]
-        },
-        {
-          "apiVersion": "2015-08-01",
-          "name": "logs",
-          "type": "config",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/Sites', parameters('appServiceName'))]"
-          ],
-          "properties": {
-            "applicationLogs": {
-              "fileSystem": {
-                "level": "Off"
-              },
-              "azureTableStorage": {
-                "level": "Off",
-                "sasUrl": null
-              },
-              "azureBlobStorage": {
-                "level": "verbose",
-                "retentionInDays": "99"
-              }
-            },
-            "httpLogs": {
-              "fileSystem": {
-                "retentionInMb": "99",
-                "retentionInDays": "99",
-                "enabled": true
-              }
-            },
-            "failedRequestsTracing": {
-              "enabled": true
-            },
-            "detailedErrorMessages": {
-              "enabled": true
-            }
-          }
         }
       ]
     },
