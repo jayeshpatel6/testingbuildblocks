@@ -139,22 +139,7 @@
           "connectionStrings": "[parameters('appServiceConnectionStrings')]",
           "virtualApplications": "[parameters('appServiceVirtualApplications')]",
           "ipSecurityRestrictions": "[parameters('ipSecurityRestrictions')]",
-          "ftpsState": "[parameters('ftpsState')]",
-          "applicationLogs": {
-            "fileSystem": {
-              "level": "Off",
-              "sasUrl": null
-
-            },
-            "azureTableStorage": {
-              "level": "Off",
-              "sasUrl": null
-            },
-            "azureBlobStorage": {
-              "level": "verbose",
-              "retentionInDays": "55"
-            }
-          }
+          "ftpsState": "[parameters('ftpsState')]"
         },
         "httpsOnly": true
       },
@@ -225,7 +210,51 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
       ]
+    },
+    {
+    "type": "Microsoft.Web/sites/config",
+    "apiVersion": "2018-11-01",
+      "location": "[resourceGroup().location]",
+    "name": "[concat(parameters('appServiceName'), '/logs')]",
+    "dependsOn": [
+        "logsStorageBlobsLoop",
+        "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
+    ],
+    "properties": {
+        "applicationLogs": {
+            "fileSystem": {
+                "level": "Off"
+            },
+            "azureTableStorage": {
+                "level": "Off",
+                "sasUrl": null
+            },
+            "azureBlobStorage": {
+                "level": "verbose",
+                "sasUrl": "",
+                "retentionInDays": "55"
+            }
+        },
+        "httpLogs": {
+            "fileSystem": {
+                "retentionInMb": 55,
+                "retentionInDays": 55,
+                "enabled": false
+            },
+            "azureBlobStorage": {
+                "enabled": false,
+                "sasUrl": "",
+                "retentionInDays": "55"
+            }
+        },
+        "failedRequestsTracing": {
+            "enabled": true
+        },
+        "detailedErrorMessages": {
+            "enabled": true
+        }
     }
+}
   ],
   "outputs": {
     "possibleOutboundIpAddresses": {
