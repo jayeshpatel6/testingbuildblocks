@@ -13,13 +13,11 @@
     },
     "appServiceAppSettings": {
       "type": "array",
-      "defaultValue": [
-      ]
+      "defaultValue": []
     },
     "appServiceConnectionStrings": {
       "type": "array",
-      "defaultValue": [
-      ]
+      "defaultValue": []
     },
     "appServiceVirtualApplications": {
       "type": "array",
@@ -49,40 +47,35 @@
     },
     "ipSecurityRestrictions": {
       "type": "array",
-      "defaultValue": [
-      ],
+      "defaultValue": [],
       "metadata": {
         "description": "Format removing backlashes: [{\"Name\": \"IP A\",\"ipAddress\": \"123.123.123.123\"},{\"Name\": \"IP B\",\"ipAddress\": \"234.234.234.234\"}]"
       }
     },
     "appServiceSlotAppSettings": {
       "type": "array",
-      "defaultValue": [
-      ],
+      "defaultValue": [],
       "metadata": {
         "description": "Use if any settings will be different between production and staging slots. Specify in the name of the setting in the SlotSetting parameters"
       }
     },
     "appServiceSlotSettingAppSettings": {
       "type": "array",
-      "defaultValue": [
-      ],
+      "defaultValue": [],
       "metadata": {
         "description": "List of app settings to set as slot specific: [\"EnvironmentName\", \"ReadOnly\"]"
       }
     },
     "appServiceSlotConnectionStrings": {
       "type": "array",
-      "defaultValue": [
-      ],
+      "defaultValue": [],
       "metadata": {
         "description": "Use if any settings will be different between production and staging slots. Specify in the name of the setting in the SlotSetting parameters"
       }
     },
     "appServiceSlotSettingConnectionStrings": {
       "type": "array",
-      "defaultValue": [
-      ],
+      "defaultValue": [],
       "metadata": {
         "description": "List of connection strings to set as slot specific: [\"Sql\", \"CosmosDb\", \"Redis\"]"
       }
@@ -210,48 +203,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
       ]
-    },
-    {
-    "type": "Microsoft.Web/sites/config",
-    "apiVersion": "2018-11-01",
-      "location": "[resourceGroup().location]",
-    "name": "[concat(parameters('appServiceName'), '/logs')]",
-    "dependsOn": [
-        "logsStorageBlobsLoop",
-        "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
-    ],
-    "properties": {
-        "applicationLogs": {
-            "fileSystem": {
-                "level": "Off"
-            },
-            "azureTableStorage": {
-                "level": "Off"
-            },
-            "azureBlobStorage": {
-                "level": "off",
-                "retentionInDays": "55"
-            }
-        },
-        "httpLogs": {
-            "fileSystem": {
-                "retentionInMb": 55,
-                "retentionInDays": 55,
-                "enabled": false
-            },
-            "azureBlobStorage": {
-                "enabled": true,
-                "retentionInDays": "55"
-            }
-        },
-        "failedRequestsTracing": {
-            "enabled": true
-        },
-        "detailedErrorMessages": {
-            "enabled": true
-        }
     }
-}
   ],
   "outputs": {
     "possibleOutboundIpAddresses": {
@@ -265,7 +217,7 @@
     "managedServiceIdentity": {
       "type": "object",
       "value": "[reference(parameters('appServiceName'), variables('appServiceApiVersion'), 'Full').identity]"
-    },
+    },    
     "stagingManagedServiceIdentityId": {
       "condition": "[parameters('deployStagingSlot')]",
       "type": "string",
