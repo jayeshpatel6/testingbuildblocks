@@ -2,22 +2,14 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "appServiceName": {
-      "type": "string",
-      "defaultValue": "jp-dev1-as-01"
-    }
   },
   "variables": {
   },
   "resources": [
     {
-      "type": "Microsoft.Web/sites/config", // logs
-      "apiVersion": "2018-11-01",
-      "location": "westeurope",
-      "name": "[concat(parameters('appServiceName'), '/logs')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
-      ],
+      "name": "logs",
+      "type": "Microsoft.Web/sites/config",
+      "location": "West Europe",
       "properties": {
         "applicationLogs": {
           "fileSystem": {
@@ -28,21 +20,21 @@
             "sasUrl": null
           },
           "azureBlobStorage": {
-            "level": "verbose",
+            "level": "Verbose",
             "sasUrl": null,
-            "retentionInDays": "66"
+            "retentionInDays": 99
           }
         },
         "httpLogs": {
           "fileSystem": {
-            "retentionInMb": 35,
-            "retentionInDays": 10,
+            "retentionInMb": 99,
+            "retentionInDays": 99,
             "enabled": true
           },
           "azureBlobStorage": {
-            "enabled": false,
             "sasUrl": null,
-            "retentionInDays": "0"
+            "retentionInDays": 99,
+            "enabled": false
           }
         },
         "failedRequestsTracing": {
