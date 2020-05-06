@@ -180,31 +180,7 @@
           "dependsOn": [
             "[parameters('appServiceName')]"
           ]
-        },
-        {
-      "apiVersion": "2015-08-01",
-      "name": "logs",
-      "type": "config",
-      "properties": {
-        "applicationLogs": {
-          "fileSystem": {
-            "level": "Warning"
-          }
-        },
-        "httpLogs": {
-          "fileSystem": {
-            "retentionInMb": 40,
-            "enabled": true
-          }
-        },
-        "failedRequestsTracing": {
-          "enabled": true
-        },
-        "detailedErrorMessages": {
-          "enabled": true
         }
-      }
-    }
       ]
     },
     {
