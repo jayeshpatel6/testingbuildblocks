@@ -180,7 +180,31 @@
           "dependsOn": [
             "[parameters('appServiceName')]"
           ]
+        },
+        {
+      "apiVersion": "2015-08-01",
+      "name": "logs",
+      "type": "Microsoft.Web/sites/config",
+      "properties": {
+        "applicationLogs": {
+          "fileSystem": {
+            "level": "Warning"
+          }
+        },
+        "httpLogs": {
+          "fileSystem": {
+            "retentionInMb": 40,
+            "enabled": true
+          }
+        },
+        "failedRequestsTracing": {
+          "enabled": true
+        },
+        "detailedErrorMessages": {
+          "enabled": true
         }
+      }
+    }
       ]
     },
     {
@@ -210,33 +234,6 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
       ]
-    },
-    {
-      "apiVersion": "2015-08-01",
-      "name": "logs",
-      "type": "Microsoft.Web/sites/config",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/Sites', parameters('appServiceName'))]"
-      ],
-      "properties": {
-        "applicationLogs": {
-          "fileSystem": {
-            "level": "Warning"
-          }
-        },
-        "httpLogs": {
-          "fileSystem": {
-            "retentionInMb": 40,
-            "enabled": true
-          }
-        },
-        "failedRequestsTracing": {
-          "enabled": true
-        },
-        "detailedErrorMessages": {
-          "enabled": true
-        }
-      }
     }
   ],
   "outputs": {
