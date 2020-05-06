@@ -11,11 +11,12 @@
   },
   "resources": [
     {
+      "type": "Microsoft.Web/sites/config", // logs
       "apiVersion": "2018-11-01",
-      "type": "Microsoft.Web/sites",
+      "location": "westeurope",
       "name": "[concat(parameters('appServiceName'), '/logs')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/Sites', parameters('appServiceName'))]"
+        "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
       ],
       "properties": {
         "applicationLogs": {
@@ -28,14 +29,20 @@
           },
           "azureBlobStorage": {
             "level": "verbose",
+            "sasUrl": null,
             "retentionInDays": "66"
           }
         },
         "httpLogs": {
           "fileSystem": {
-            "retentionInMb": "66",
-            "retentionInDays": "66",
+            "retentionInMb": 35,
+            "retentionInDays": 10,
             "enabled": true
+          },
+          "azureBlobStorage": {
+            "enabled": false,
+            "sasUrl": null,
+            "retentionInDays": "0"
           }
         },
         "failedRequestsTracing": {
