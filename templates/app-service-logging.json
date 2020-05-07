@@ -2,9 +2,8 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-        "siteName": {
-      "type": "string",
-      "defaultValue": "jp-dev1-as-01"
+    "siteName": {
+      "type": "string"
     },
     "appServiceLogRetentionDays": {
       "type": "string",
@@ -18,7 +17,7 @@
   "variables": {
   },
   "resources": [
-     {
+    {
       "apiVersion": "2016-08-01",
       "name": "[concat(parameters('siteName'), '/logs')]",
       "type": "Microsoft.Web/Sites/config",
