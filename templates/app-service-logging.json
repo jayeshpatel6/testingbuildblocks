@@ -2,14 +2,29 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+        "siteName": {
+      "type": "string",
+      "defaultValue": "jp-dev1-as-01"
+    },
+    "appServiceLogRetentionDays": {
+      "type": "string",
+      "defaultValue": "30"
+    },
+    "appServiceLogRetentionMb": {
+      "type": "string",
+      "defaultValue": "30"
+    }
   },
   "variables": {
   },
   "resources": [
-    {
-      "name": "logs",
-      "type": "Microsoft.Web/sites/config",
-      "location": "West Europe",
+     {
+      "apiVersion": "2016-08-01",
+      "name": "[concat(parameters('siteName'), '/logs')]",
+      "type": "Microsoft.Web/Sites/config",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/', 'app-service')]"
+      ],
       "properties": {
         "applicationLogs": {
           "fileSystem": {
@@ -20,21 +35,15 @@
             "sasUrl": null
           },
           "azureBlobStorage": {
-            "level": "Verbose",
-            "sasUrl": null,
-            "retentionInDays": 99
+            "level": "verbose",
+            "retentionInDays": "[parameters('appServiceLogRetentionDays')]"
           }
         },
         "httpLogs": {
           "fileSystem": {
-            "retentionInMb": 99,
-            "retentionInDays": 99,
+            "retentionInMb": "[parameters('appServiceLogRetentionMb')]",
+            "retentionInDays": "[parameters('appServiceLogRetentionDays')]",
             "enabled": true
-          },
-          "azureBlobStorage": {
-            "sasUrl": null,
-            "retentionInDays": 99,
-            "enabled": false
           }
         },
         "failedRequestsTracing": {
