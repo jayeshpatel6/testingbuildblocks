@@ -23,7 +23,6 @@
       "name": "[concat(parameters('siteName'), '/logs')]",
       "type": "Microsoft.Web/Sites/config",
       "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'app-service')]"
       ],
       "properties": {
         "applicationLogs": {
