@@ -177,7 +177,8 @@
       "defaultValue": "30"
     },
     "storageAccountName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "jpstrtesting1"
     }
   },
   "variables": {
