@@ -34,7 +34,8 @@
           },
           "azureBlobStorage": {
             "level": "verbose",
-            "retentionInDays": "[parameters('appServiceLogRetentionDays')]"
+            "retentionInDays": "[parameters('appServiceLogRetentionDays')]",
+ 	          "sasUrl": "jpstrtesting1"
           }
         },
         "httpLogs": {
