@@ -34,8 +34,7 @@
           },
           "azureBlobStorage": {
             "level": "verbose",
-            "retentionInDays": "[parameters('appServiceLogRetentionDays')]",
- 	          "sasUrl": "https://jpstrtesting1-secondary.blob.core.windows.net/"
+            "retentionInDays": "[parameters('appServiceLogRetentionDays')]"
           }
         },
         "httpLogs": {
