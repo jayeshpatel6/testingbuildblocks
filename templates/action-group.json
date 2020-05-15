@@ -8,7 +8,7 @@
                 "description": "Unique name (within the Resource Group) for the Action group."
             }
         },
-        "actionGroupShortName": {
+        "groupShortName": {
             "type": "string",
             "maxLength": 12,
             "metadata": {
@@ -31,7 +31,7 @@
             "name": "[parameters('actionGroupName')]",
             "location": "Global",
             "properties": {
-                "groupShortName": "[parameters('actionGroupShortName')]",
+                "groupShortName": "[parameters('groupShortName')]",
                 "enabled": true,
                 "smsReceivers": [
                 ],
