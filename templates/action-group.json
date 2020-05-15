@@ -8,22 +8,37 @@
                 "description": "Unique name (within the Resource Group) for the Action group."
             }
         },
-        "groupShortName": {
+        "actionGroupShortName": {
             "type": "string",
             "maxLength": 12,
             "metadata": {
                 "description": "Short name (maximum 12 characters) for the Action group."
-            },
-            "defaultValue": "EmailJBAE"
+            }
         },
-        "actionName": {
+        "webhookReceiverName": {
             "type": "string",
-            "defaultValue": "Email JayeshBAE Team_-EmailAction-"
+            "defaultValue": "",
+            "metadata": {
+                "description": "Webhook receiver service Name."
+            }
         },
-        "emailAddress": {
+        "webhookServiceUri": {
             "type": "string",
-            "defaultValue": "jayeshbae@hotmail.com"
+            "defaultValue": "",
+            "metadata": {
+                "description": "Webhook receiver service URI."
+            }
         }
+    },
+    "variables": {
+        "webhookConfiguration": [
+            {
+                "name": "[parameters('webhookReceiverName')]",
+                "serviceUri": "[parameters('webhookServiceUri')]",
+                "useCommonAlertSchema": true
+            }
+        ],
+        "webhookReciever": "[if(greater(length(parameters('webhookReceiverName')),0), variables('webhookConfiguration'), json('[]'))]"
     },
     "resources": [
         {
@@ -32,20 +47,13 @@
             "name": "[parameters('actionGroupName')]",
             "location": "Global",
             "properties": {
-                "groupShortName": "[parameters('groupShortName')]",
+                "groupShortName": "[parameters('actionGroupShortName')]",
                 "enabled": true,
                 "smsReceivers": [
                 ],
                 "emailReceivers": [
-                    {
-                        "name": "[parameters('actionName')]",
-                        "emailAddress": "[parameters('emailAddress')]",
-                        "status": "Enabled",
-                        "useCommonAlertSchema": false
-                    }
                 ],
-                "webhookReceivers": [
-                ]
+                "webhookReceivers": "[variables('webhookReciever')]"
             }
         }
     ],
