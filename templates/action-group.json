@@ -16,12 +16,10 @@
             }
         },
         "actionName": {
-            "type": "string",
-            "defaultValue": "EMailTeam"
+            "type": "string"
         },
         "emailAddress": {
-            "type": "string",
-            "defaultValue": "jayeshbae@hotmail.com"
+            "type": "string"
         }  
     },
     "variables": {
