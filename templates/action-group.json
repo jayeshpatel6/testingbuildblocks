@@ -13,7 +13,8 @@
             "maxLength": 12,
             "metadata": {
                 "description": "Short name (maximum 12 characters) for the Action group."
-            }
+            },
+            "defaultValue": "EmailJBAE"
         },
         "actionName": {
             "type": "string",
