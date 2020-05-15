@@ -14,7 +14,15 @@
             "metadata": {
                 "description": "Short name (maximum 12 characters) for the Action group."
             }
-        }
+        },
+        "actionName": {
+            "type": "string",
+            "defaultValue": "EMailTeam"
+        },
+        "emailAddress": {
+            "type": "string",
+            "defaultValue": "jayeshbae@hotmail.com"
+        }  
     },
     "variables": {
     },
@@ -30,6 +38,12 @@
                 "smsReceivers": [
                 ],
                 "emailReceivers": [
+                    {
+                        "name": "[parameters('actionName')]",
+                        "emailAddress": "[parameters('emailAddress')]",
+                        "status": "Enabled",
+                        "useCommonAlertSchema": false
+                    }
                 ]
             }
         }
