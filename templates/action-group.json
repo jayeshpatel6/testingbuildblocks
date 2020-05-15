@@ -56,11 +56,6 @@
                     }
                 ],
                 "webhookReceivers": [
-                    {
-                        "name": "[parameters('webhookReceiverName')]",
-                        "serviceUri": "[parameters('webhookServiceUri')]",
-                        "useCommonAlertSchema": true
-                    }
                 ]
             }
         }
