@@ -14,31 +14,9 @@
             "metadata": {
                 "description": "Short name (maximum 12 characters) for the Action group."
             }
-        },
-        "webhookReceiverName": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Webhook receiver service Name."
-            }
-        },
-        "webhookServiceUri": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Webhook receiver service URI."
-            }
         }
     },
     "variables": {
-        "webhookConfiguration": [
-            {
-                "name": "[parameters('webhookReceiverName')]",
-                "serviceUri": "[parameters('webhookServiceUri')]",
-                "useCommonAlertSchema": true
-            }
-        ],
-        "webhookReciever": "[if(greater(length(parameters('webhookReceiverName')),0), variables('webhookConfiguration'), json('[]'))]"
     },
     "resources": [
         {
@@ -52,8 +30,7 @@
                 "smsReceivers": [
                 ],
                 "emailReceivers": [
-                ],
-                "webhookReceivers": "[variables('webhookReciever')]"
+                ]
             }
         }
     ],
