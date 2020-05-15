@@ -2,31 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "actionGroupName": {
-            "type": "string",
-            "metadata": {
-                "description": "Unique name (within the Resource Group) for the Action group."
-            }
-        },
-        "actionGroupShortName": {
-            "type": "string",
-            "maxLength": 12,
-            "metadata": {
-                "description": "Short name (maximum 12 characters) for the Action group."
-            }
-        },
-        "webhookReceiverName": {
-            "type": "string",
-            "metadata": {
-                "description": "Webhook receiver service Name."
-            }
-        },
-        "webhookServiceUri": {
-            "type": "string",
-            "metadata": {
-                "description": "Webhook receiver service URI."
-            }
-        },
         "actionName": {
             "type": "string",
             "defaultValue": "Email JayeshBAE Team_-EmailAction-"
@@ -40,10 +15,10 @@
         {
             "type": "Microsoft.Insights/actionGroups",
             "apiVersion": "2018-03-01",
-            "name": "[parameters('actionGroupName')]",
+            "name": "VYP Email Action Group",
             "location": "Global",
             "properties": {
-                "groupShortName": "[parameters('actionGroupShortName')]",
+                "groupShortName": "EmailJBAE",
                 "enabled": true,
                 "smsReceivers": [
                 ],
@@ -61,9 +36,5 @@
         }
     ],
     "outputs": {
-        "actionGroupResourceId": {
-            "type": "string",
-            "value": "[resourceId('Microsoft.Insights/actionGroups',parameters('actionGroupName'))]"
-        }
     }
 }
