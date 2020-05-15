@@ -26,6 +26,14 @@
             "metadata": {
                 "description": "Webhook receiver service URI."
             }
+        },
+        "actionName": {
+            "type": "string",
+            "defaultValue": "Email JayeshBAE Team_-EmailAction-"
+        },
+        "emailAddress": {
+            "type": "string",
+            "defaultValue": "jayeshbae@hotmail.com"
         }
     },
     "resources": [
@@ -40,6 +48,12 @@
                 "smsReceivers": [
                 ],
                 "emailReceivers": [
+                    {
+                        "name": "[parameters('actionName')]",
+                        "emailAddress": "[parameters('emailAddress')]",
+                        "status": "Enabled",
+                        "useCommonAlertSchema": false
+                    }
                 ],
                 "webhookReceivers": [
                     {
