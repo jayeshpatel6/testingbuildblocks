@@ -179,6 +179,10 @@
     "storageAccountName": {
       "type": "string",
       "defaultValue": ""
+    },
+    "alwaysOn": {
+      "type": "bool",
+      "defaultValue": true
     }
   },
   "variables": {
@@ -202,7 +206,7 @@
         "serverFarmId": "[variables('appServicePlanId')]",
         "clientAffinityEnabled": false,
         "siteConfig": {
-          "alwaysOn": true,
+          "alwaysOn": "[parameters('alwaysOn')]",
           "appSettings": "[parameters('appServiceAppSettings')]",
           "connectionStrings": "[parameters('appServiceConnectionStrings')]",
           "virtualApplications": "[parameters('appServiceVirtualApplications')]",
