@@ -3,12 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "pingTestDescription": {
-            "type": "string",
-            "defaultValue": "UKRLP Web service Ping Test"
+            "type": "string"
         },
         "appName": {
-            "type": "string",
-            "defaultValue": "jp-dev1-as-01"
+            "type": "string"
         }
     },
     "variables": {
