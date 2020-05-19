@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "pingTestDescription": {
+            "type": "string",
+            "defaultValue": "UKRLP Web service Ping Test"
+        },
+        "appName": {
+            "type": "string",
+            "defaultValue": "jp-dev1-as-01"
+        }
+    },
+    "variables": {
+        "pingTestName": "[concat('PingTest-', toLower(parameters('appName')))]",
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Insights/webtests",
+            "apiVersion": "2014-04-01",
+            "name": "[variables('pingTestName')]",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-link:', resourceId('Microsoft.Insights/components', parameters('appName')))]": "Resource"
+            },
+            "properties": {
+                "SyntheticMonitorId": "[variables('pingTestName')]",
+                "Name": "[variables('pingTestName')]",
+                "Description": "[parameters('pingTestDescription')]",
+                "Enabled": true,
+                "Frequency": 300,
+                "Timeout": 120,
+                "Kind": "ping",
+                "RetryEnabled": true,
+                "Locations": [
+                    {
+                        "Id": "us-ca-sjc-azr"
+                    },
+                    {
+                        "Id": "us-tx-sn1-azr"
+                    },
+                    {
+                        "Id": "us-il-ch1-azr"
+                    },
+                    {
+                        "Id": "us-va-ash-azr"
+                    },
+                    {
+                        "Id": "us-fl-mia-edge"
+                    }
+                ],
+                "Configuration": {
+                    "WebTest": "[concat('<WebTest         Name=\"', variables('pingTestName'), '\"         Enabled=\"True\"         CssProjectStructure=\"\"         CssIteration=\"\"         Timeout=\"120\"         WorkItemIds=\"\"         xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\"         Description=\"\"         CredentialUserName=\"\"         CredentialPassword=\"\"         PreAuthenticate=\"True\"         Proxy=\"default\"         StopOnError=\"False\"         RecordedResultFile=\"\"         ResultsLocale=\"\">        <Items>        <Request         Method=\"GET\"         Version=\"1.1\"         Url=\"', parameters('webTestURL'), '\"         ThinkTime=\"0\"         Timeout=\"120\"         ParseDependentRequests=\"False\"         FollowRedirects=\"True\"         RecordResult=\"True\"         Cache=\"False\"         ResponseTimeGoal=\"0\"         Encoding=\"utf-8\"         ExpectedHttpStatusCode=\"200\"         ExpectedResponseUrl=\"\"         ReportingName=\"\"         IgnoreHttpStatusCode=\"False\" />        </Items>        </WebTest>')]"
+                },
+                "provisioningState": "Succeeded"
+            }
+        }
+    ],
+    "outputs": {
+    }
+}
