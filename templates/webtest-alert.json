@@ -9,8 +9,7 @@
             "type": "string"
         },
         "bcWebTestURL": {
-            "type": "string",
-            "defaultValue": "https://api-customerengagement.platform.education.gov.uk/Finance/heartbeat"
+            "type": "string"
         },
         "actionGroupName": {
             "type": "string"
@@ -38,7 +37,7 @@
             "type": "string"
         },
         "ocpAPimKey": {
-            "type": "string"
+            "type": "securestring"
         }
     },
     "variables": {
