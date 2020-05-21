@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "pingTestDescription": {
+        "pingTest1Description": {
             "type": "string"
         },
         "appInsightName": {
@@ -11,7 +11,7 @@
         "webTestURL": {
             "type": "string"
         },
-        "alertDescription": {
+        "alert1Description": {
             "type": "string"
         },
         "actionGroupName": {
@@ -26,12 +26,20 @@
         },
         "testName2": {
             "type": "string"
+        },
+        "pingTest2Description": {
+            "type": "string"
+        },
+        "alert2Description": {
+            "type": "string"
         }
     },
     "variables": {
         "pingTestName1": "[concat('PingTest-', toLower(parameters('testName1')))]",
         "pingAlertRuleName1": "[concat('PingAlert-', toLower(parameters('testName1')))]",
-        "pingTestName2": "[concat('PingTest-', toLower(parameters('testName2')))]"
+        "pingTestName2": "[concat('PingTest-', toLower(parameters('testName2')))]",
+        "pingAlertRuleName2": "[concat('PingAlert-', toLower(parameters('testName2')))]"
+
     },
     "resources": [
         {
@@ -45,7 +53,7 @@
             "properties": {
                 "SyntheticMonitorId": "[variables('pingTestName1')]",
                 "Name": "[variables('pingTestName1')]",
-                "Description": "[parameters('pingTestDescription')]",
+                "Description": "[parameters('pingTest1Description')]",
                 "Enabled": true,
                 "Frequency": 300,
                 "Timeout": 120,
@@ -87,7 +95,7 @@
                 "[concat('hidden-link:', resourceId('Microsoft.Insights/webtests', variables('pingTestName1')))]": "Resource"
             },
             "properties": {
-                "description": "[parameters('alertDescription')]",
+                "description": "[parameters('alert1Description')]",
                 "severity": 1,
                 "enabled": "[parameters('enableAlert')]",
                 "scopes": [
@@ -121,7 +129,7 @@
             "properties": {
                 "SyntheticMonitorId": "[variables('pingTestName2')]",
                 "Name": "[variables('pingTestName2')]",
-                "Description": "[parameters('pingTestDescription')]",
+                "Description": "[parameters('pingTest2Description')]",
                 "Enabled": true,
                 "Frequency": 300,
                 "Timeout": 120,
@@ -148,6 +156,42 @@
                     "WebTest": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<TestCase Name=\"FiddlerGeneratedWebTest\" Id=\"\" Owner=\"\" Description=\"\" Priority=\"0\" Enabled=\"True\" CssProjectStructure=\"\" CssIteration=\"\" DeploymentItemsEditable=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"\" RequestCallbackClass=\"\" TestCaseCallbackClass=\"\">\r\n  <Items>\r\n    <Request Method=\"GET\" Version=\"1.1\" Url=\"https://api-customerengagement.platform.education.gov.uk/Finance/heartbeat\" ThinkTime=\"0\" Timeout=\"60\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\">\r\n      <Headers>\r\n        <Header Name=\"Ocp-Apim-Subscription-Key\" Value=\"d03f861ca6e047f7adb50fd171434e04\" />\r\n      </Headers>\r\n      <QueryStringParameters>\r\n        <QueryStringParameter Name=\"api-version\" Value=\"2019-06-01\" UrlEncode=\"True\" UseToGroupResults=\"False\" />\r\n      </QueryStringParameters>\r\n    </Request>\r\n  </Items>\r\n</TestCase>"
                 },
                 "provisioningState": "Succeeded"
+            }
+        },
+        {
+            "name": "[variables('pingAlertRuleName2')]",
+            "type": "Microsoft.Insights/metricAlerts",
+            "apiVersion": "2018-03-01",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/webtests', variables('pingTestName2'))]"
+            ],
+            "tags": {
+                "[concat('hidden-link:', resourceId('Microsoft.Insights/components', parameters('appInsightName')))]": "Resource",
+                "[concat('hidden-link:', resourceId('Microsoft.Insights/webtests', variables('pingTestName2')))]": "Resource"
+            },
+            "properties": {
+                "description": "[parameters('alert2Description')]",
+                "severity": 1,
+                "enabled": "[parameters('enableAlert')]",
+                "scopes": [
+                    "[resourceId('Microsoft.Insights/webtests',variables('pingTestName2'))]",
+                    "[resourceId('Microsoft.Insights/components',parameters('appInsightName'))]"
+                ],
+                "evaluationFrequency": "PT1M",
+                "windowSize": "PT5M",
+                "templateType": 0,
+                "criteria": {
+                    "odata.type": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
+                    "webTestId": "[resourceId('Microsoft.Insights/webtests', variables('pingTestName2'))]",
+                    "componentId": "[resourceId('Microsoft.Insights/components', parameters('appInsightName'))]",
+                    "failedLocationCount": 1
+                },
+                "actions": [
+                    {
+                        "actionGroupId": "[resourceId('Microsoft.Insights/actionGroups', parameters('actionGroupName'))]"
+                    }
+                ]
             }
         }
     ],
