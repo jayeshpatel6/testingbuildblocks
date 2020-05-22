@@ -5,64 +5,40 @@
         "appInsightName": {
             "type": "string"
         },
-        "webTestURL": {
+        "testName": {
             "type": "string"
         },
-        "bcWebTestURL": {
+        "pingTestDescription": {
             "type": "string"
         },
-        "actionGroupName": {
-            "type": "string"
-        },
-        "enableAlert": {
-            "type": "bool",
-            "defaultValue": true
-        },
-        "testName1": {
-            "type": "string"
-        },
-        "testName2": {
-            "type": "string"
-        },
-        "pingTestDescription1": {
-            "type": "string"
-        },
-        "pingTestDescription2": {
-            "type": "string"
-        },
-        "alertDescription1": {
-            "type": "string"
-        },
-        "alertDescription2": {
-            "type": "string"
-        },
-        "ocpAPimKey": {
+        "subscriptionkey": {
             "type": "securestring"
         },
         "headerName": {
             "type": "string"
+        },       
+        "webTestURL": {
+            "type": "string"
         }
     },
     "variables": {
-        "pingTestName1": "[concat('PingTest-', toLower(parameters('testName1')))]",
-        "pingAlertRuleName1": "[concat('PingAlert-', toLower(parameters('testName1')))]",
-        "pingTestName2": "[concat('PingTest-', toLower(parameters('testName2')))]",
-        "pingAlertRuleName2": "[concat('PingAlert-', toLower(parameters('testName2')))]"
+        "pingTestName": "[concat('PingTest-', toLower(parameters('testName')))]"
+
 
     },
     "resources": [
         {
             "type": "Microsoft.Insights/webtests",
             "apiVersion": "2014-04-01",
-            "name": "[variables('pingTestName2')]",
+            "name": "[variables('pingTestName')]",
             "location": "[resourceGroup().location]",
             "tags": {
                 "[concat('hidden-link:', resourceId('Microsoft.Insights/components', parameters('appInsightName')))]": "Resource"
             },
             "properties": {
-                "SyntheticMonitorId": "[variables('pingTestName2')]",
-                "Name": "[variables('pingTestName2')]",
-                "Description": "[parameters('pingTestDescription2')]",
+                "SyntheticMonitorId": "[variables('pingTestName')]",
+                "Name": "[variables('pingTestName')]",
+                "Description": "[parameters('pingTestDescription')]",
                 "Enabled": true,
                 "Frequency": 300,
                 "Timeout": 120,
@@ -86,11 +62,11 @@
                     }
                 ],
                 "Configuration": {
-                    "WebTest": "[concat('<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<TestCase Name=\"FiddlerGeneratedWebTest\" Id=\"\" Owner=\"\" Description=\"\" Priority=\"0\" Enabled=\"True\" CssProjectStructure=\"\" CssIteration=\"\" DeploymentItemsEditable=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"\" RequestCallbackClass=\"\" TestCaseCallbackClass=\"\">\r\n  <Items>\r\n    <Request Method=\"GET\" Version=\"1.1\" Url=\"', parameters('bcWebTestURL'), '\" ThinkTime=\"0\" Timeout=\"60\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\">\r\n      <Headers>\r\n        <Header Name=\"', parameters('headerName'), '\" Value=\"', parameters('ocpAPimKey'), '\" />\r\n      </Headers>\r\n      <QueryStringParameters>\r\n        <QueryStringParameter Name=\"api-version\" Value=\"2019-06-01\" UrlEncode=\"True\" UseToGroupResults=\"False\" />\r\n      </QueryStringParameters>\r\n    </Request>\r\n  </Items>\r\n</TestCase>')]"
+                    "WebTest": "[concat('<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<TestCase Name=\"FiddlerGeneratedWebTest\" Id=\"\" Owner=\"\" Description=\"\" Priority=\"0\" Enabled=\"True\" CssProjectStructure=\"\" CssIteration=\"\" DeploymentItemsEditable=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"\" RequestCallbackClass=\"\" TestCaseCallbackClass=\"\">\r\n  <Items>\r\n    <Request Method=\"GET\" Version=\"1.1\" Url=\"', parameters('webTestURL'), '\" ThinkTime=\"0\" Timeout=\"60\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\">\r\n      <Headers>\r\n        <Header Name=\"', parameters('headerName'), '\" Value=\"', parameters('subscriptionkey'), '\" />\r\n      </Headers>\r\n      <QueryStringParameters>\r\n        <QueryStringParameter Name=\"api-version\" Value=\"2019-06-01\" UrlEncode=\"True\" UseToGroupResults=\"False\" />\r\n      </QueryStringParameters>\r\n    </Request>\r\n  </Items>\r\n</TestCase>')]"
                 },
                 "provisioningState": "Succeeded"
             }
-        },
+        }
         ],
     "outputs": {
     }
