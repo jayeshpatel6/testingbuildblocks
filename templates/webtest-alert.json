@@ -42,7 +42,7 @@
         "webTestType": {
             "type": "string",
             "allowedValues": [
-                "WebTest",
+                "pingtest",
                 "multiStepTest"
             ]
         }
