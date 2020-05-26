@@ -25,23 +25,18 @@
             "type": "string"
         },
         "subscriptionkey": {
-            "type": "securestring"
+            "type": "securestring",
+            "defaultValue": ""
         },
         "headerName": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": ""
         },
         "webTestType": {
             "type": "string",
             "allowedValues": [
                 "WebTest",
                 "multiStepTest"
-            ]
-        },
-        "testType": {
-            "type": "bool",
-            "allowedValues": [
-                "ping",
-                "multistep"
             ]
         }
     },
