@@ -32,6 +32,13 @@
             "type": "string",
             "defaultValue": ""
         },
+        "webTestKind": {
+            "type": "string",
+            "allowedValues": [
+                "ping",
+                "multistep"
+            ]
+        },
         "webTestType": {
             "type": "string",
             "allowedValues": [
@@ -69,7 +76,7 @@
                 "Enabled": true,
                 "Frequency": 300,
                 "Timeout": 120,
-                "Kind": "[parameters('testType')]",
+                "Kind": "[parameters('webTestKind')]",
                 "RetryEnabled": true,
                 "Locations": [
                     {
