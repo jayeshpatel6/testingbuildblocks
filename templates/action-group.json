@@ -38,8 +38,8 @@
             "defaultValue": ""
         },
         "emailReceiversStatus": {
-            "type": "bool",
-            "defaultValue": enabled
+            "type": "string",
+            "defaultValue": "enabled"
         }
     },
     "variables": {
