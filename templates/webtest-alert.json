@@ -11,7 +11,7 @@
         "actionGroupName": {
             "type": "string"
         },
-        "enableAlert": {
+        "enableTest": {
             "type": "bool",
             "defaultValue": true
         },
@@ -73,7 +73,7 @@
                 "SyntheticMonitorId": "[variables('pingtestName')]",
                 "Name": "[variables('pingtestName')]",
                 "Description": "[parameters('pingTestDescription')]",
-                "Enabled": true,
+                "Enabled": "[parameters('enableTest')]",
                 "Frequency": 300,
                 "Timeout": 120,
                 "Kind": "[parameters('webTestKind')]",
@@ -116,7 +116,7 @@
             "properties": {
                 "description": "[parameters('alertDescription')]",
                 "severity": 1,
-                "enabled": "[parameters('enableAlert')]",
+                "enabled": "[parameters('enableTest')]",
                 "scopes": [
                     "[resourceId('Microsoft.Insights/webtests',variables('pingtestName'))]",
                     "[resourceId('Microsoft.Insights/components',parameters('appInsightName'))]"
