@@ -39,7 +39,7 @@
         },
         "emailReceiversStatus": {
             "type": "bool",
-            "defaultValue": "Enabled"
+            "defaultValue": enabled
         }
     },
     "variables": {
