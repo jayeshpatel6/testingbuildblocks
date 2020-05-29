@@ -29,7 +29,7 @@
                 "description": "Webhook receiver service URI."
             }
         },
-        "emailActionName": {
+        "actionName": {
             "type": "string",
             "defaultValue": ""
         },
@@ -52,14 +52,14 @@
         ],
         "emailConfiguration": [
             {
-                "name": "[parameters('emailActionName')]",
+                "name": "[parameters('actionName')]",
                 "emailAddress": "[parameters('emailAddress')]",
                 "status": "[parameters('emailReceiversStatus')]",
                 "useCommonAlertSchema": false
             }
         ],
         "webhookReciever": "[if(greater(length(parameters('webhookReceiverName')),0), variables('webhookConfiguration'), json('[]'))]",
-        "emailReceiver": "[if(greater(length(parameters('emailActionName')),0), variables('emailConfiguration'), json('[]'))]"
+        "emailReceiver": "[if(greater(length(parameters('actionName')),0), variables('emailConfiguration'), json('[]'))]"
     },
     "resources": [
         {
